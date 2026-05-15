@@ -259,7 +259,7 @@ function HeroSection() {
         >
           <a href="#estimate">
             <Button className="bg-champagne text-obsidian h-12 rounded-none px-8 text-sm font-semibold tracking-wide hover:bg-champagne-light">
-              Start Your Estimate <ArrowRight className="ml-2 h-4 w-4" />
+              Start Visual Quote <Camera className="ml-2 h-4 w-4" />
             </Button>
           </a>
           <a href="#craft">
@@ -1161,18 +1161,68 @@ function FacilitySection() {
 
 /* ──────────────────────────────── FOOTER ──────────────────────────────── */
 
+/* SF Symbols–style ultra-thin monochrome social glyphs */
+function InstagramIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function LinkedInIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
+      <rect x="2" y="2" width="20" height="20" rx="3" />
+      <line x1="8" y1="11" x2="8" y2="16" />
+      <line x1="8" y1="8" x2="8" y2="8.01" strokeWidth={2} strokeLinecap="round" />
+      <path d="M12 16v-5a2 2 0 0 1 4 0v5" />
+      <line x1="12" y1="11" x2="12" y2="16" />
+    </svg>
+  )
+}
+
+function FacebookIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  )
+}
+
+function YelpIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
+      <path d="M10.5 2.5c0 0-1 3-1 5s1 3 2 3 2-1 2-3-1-5-1-5" />
+      <path d="M4 7c0 0 2.5 1.5 4 2.5s2 2 1.5 3-2 1-3.5 0S3 8 3 8" />
+      <path d="M4 17c0 0 2.5-1.5 4-2.5s2-2 1.5-3-2-1-3.5 0S3 16 3 16" />
+      <path d="M13.5 14.5c0 0 1 3 1 5s-1 3-2 3-2-1-2-3 1-5 1-5" />
+      <path d="M17.5 12.5c0 0-2.5-1.5-4-2.5s-2-2-1.5-3 2-1 3.5 0S21 8 21 8" />
+    </svg>
+  )
+}
+
+const socialLinks = [
+  { Icon: InstagramIcon, href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
+  { Icon: LinkedInIcon, href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
+  { Icon: FacebookIcon, href: 'https://facebook.com/jlcustomupholstery', label: 'Facebook' },
+  { Icon: YelpIcon, href: 'https://yelp.com/biz/jl-custom-upholstery-santa-fe-springs', label: 'Yelp' },
+]
+
 function Footer() {
   return (
     <footer className="bg-obsidian mt-auto">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between">
-          {/* Brand */}
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+          {/* Col 1: Mission */}
           <div>
             <div className="flex items-center gap-2">
               <img
                 src="/images/jl-logo.svg"
                 alt="JL Logo"
-                className="h-8 w-8"
+                className="h-8 w-auto"
               />
               <span className="text-champagne text-2xl font-black tracking-tight">
                 JL
@@ -1181,24 +1231,63 @@ function Footer() {
                 CUSTOM UPHOLSTERY
               </span>
             </div>
-            <p className="mt-3 text-xs font-light leading-relaxed text-white/40">
+            <p className="mt-4 text-sm font-light leading-relaxed text-white/50">
+              Grounded in Integrity. Precision in Craft.
+            </p>
+            <p className="mt-2 text-xs font-light text-white/30">
               Jesus is Lord
             </p>
           </div>
 
-          {/* Contact */}
-          <div className="flex flex-col items-center gap-2 md:items-end">
-            <div className="flex items-center gap-2 text-xs font-light text-white/60">
-              <MapPin className="h-3 w-3 text-champagne" />
-              Fullerton, CA
+          {/* Col 2: Studio */}
+          <div>
+            <h4 className="text-xs font-medium tracking-[0.2em] text-white/40 uppercase">
+              Studio
+            </h4>
+            <div className="mt-4 space-y-3">
+              <div className="flex items-center gap-2 text-sm font-light text-white/60">
+                <MapPin className="h-3.5 w-3.5 text-champagne/70" />
+                1234 Lakeland Rd, Santa Fe Springs, CA
+              </div>
+              <div className="flex items-center gap-2 text-sm font-light text-white/60">
+                <Phone className="h-3.5 w-3.5 text-champagne/70" />
+                (714) 555-0100
+              </div>
+              <div className="flex items-center gap-2 text-sm font-light text-white/60">
+                <Mail className="h-3.5 w-3.5 text-champagne/70" />
+                info@jlcustomupholstery.com
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-xs font-light text-white/60">
-              <Phone className="h-3 w-3 text-champagne" />
-              (714) 555-0100
+            <p className="mt-4 text-xs font-light text-champagne/50">
+              New Expanded Facility
+            </p>
+          </div>
+
+          {/* Col 3: Socials */}
+          <div className="md:text-right">
+            <h4 className="text-xs font-medium tracking-[0.2em] text-white/40 uppercase">
+              Connect
+            </h4>
+            <div className="mt-4 flex items-center gap-5 md:justify-end">
+              {socialLinks.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-white/40 transition-colors duration-200 hover:text-white"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
             </div>
-            <div className="flex items-center gap-2 text-xs font-light text-white/60">
-              <Mail className="h-3 w-3 text-champagne" />
-              info@jlcustomupholstery.com
+            <div className="mt-6">
+              <a href="#estimate">
+                <Button className="bg-champagne text-obsidian h-10 rounded-none px-6 text-xs font-semibold tracking-wide hover:bg-champagne-light">
+                  Start Visual Quote <Camera className="ml-2 h-3.5 w-3.5" />
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -1207,7 +1296,7 @@ function Footer() {
 
         <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
           <p className="text-xs font-light text-white/30">
-            &copy; 2025 JL Custom Upholstery. All rights reserved.
+            &copy; {new Date().getFullYear()} JL Custom Upholstery. All rights reserved.
           </p>
           <p className="text-xs font-light text-white/30">
             Scan our business card QR for Instant Photo Estimates
@@ -1215,6 +1304,189 @@ function Footer() {
         </div>
       </div>
     </footer>
+  )
+}
+
+/* ──────────────────────────────── AI AGENT ──────────────────────────────── */
+
+function AIAgent() {
+  const [open, setOpen] = useState(false)
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([])
+  const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [sessionId] = useState(() => `session-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`)
+  const chatEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [open])
+
+  const sendMessage = async () => {
+    const text = input.trim()
+    if (!text || loading) return
+
+    setInput('')
+    setMessages((prev) => [...prev, { role: 'user', content: text }])
+    setLoading(true)
+
+    try {
+      const res = await fetch('/api/agent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, message: text }),
+      })
+      const data = await res.json()
+      if (data.success && data.response) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: data.response }])
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: 'I apologize — something went wrong. Please try again.' },
+        ])
+      }
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: 'Connection error. Please try again.' },
+      ])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <>
+      {/* Floating Glassmorphism Tab */}
+      <motion.button
+        onClick={() => setOpen(!open)}
+        className="fixed bottom-6 right-6 z-50 group flex items-center gap-2"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        aria-label="Open AI Concierge"
+      >
+        {/* Hover text — hidden until hover */}
+        <span className="hidden group-hover:inline text-xs font-light tracking-wide text-white/80 whitespace-nowrap">
+          Analyze My Project
+        </span>
+        <span
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-obsidian/60 backdrop-blur-[20px] transition-colors duration-200 hover:border-champagne/40"
+        >
+          <Camera className="h-5 w-5 text-white/80" />
+        </span>
+      </motion.button>
+
+      {/* Chat Panel */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-22 right-6 z-50 flex h-[520px] w-[380px] max-w-[calc(100vw-48px)] flex-col border border-white/15 bg-obsidian/80 backdrop-blur-[20px] shadow-2xl"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-champagne/30">
+                  <Camera className="h-4 w-4 text-champagne" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-white">JL Atelier Concierge</p>
+                  <p className="text-[10px] font-light tracking-wide text-white/40">AI-Powered Consultation</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="flex h-7 w-7 items-center justify-center text-white/40 transition-colors hover:text-white"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 scroll-smooth">
+              {messages.length === 0 && (
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  <Camera className="h-8 w-8 text-champagne/40 mb-3" />
+                  <p className="text-sm font-light text-white/50 leading-relaxed">
+                    Welcome to the JL Atelier.<br />
+                    To begin your precision estimate,<br />
+                    snap or upload a photo of your piece.
+                  </p>
+                </div>
+              )}
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[85%] px-4 py-3 text-sm font-light leading-relaxed ${
+                      msg.role === 'user'
+                        ? 'bg-champagne/15 text-white/90'
+                        : 'bg-white/5 text-white/70'
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+              {loading && (
+                <div className="flex justify-start">
+                  <div className="bg-white/5 px-4 py-3 text-xs font-light text-white/40">
+                    <motion.span
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      Analyzing fabric density and frame architecture...
+                    </motion.span>
+                  </div>
+                </div>
+              )}
+              <div ref={chatEndRef} />
+            </div>
+
+            {/* Input */}
+            <div className="border-t border-white/10 px-4 py-3">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  sendMessage()
+                }}
+                className="flex items-center gap-2"
+              >
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Describe your project..."
+                  className="flex-1 bg-transparent text-sm font-light text-white placeholder:text-white/30 outline-none"
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || loading}
+                  className="flex h-8 w-8 items-center justify-center text-champagne/60 transition-colors hover:text-champagne disabled:opacity-30"
+                  aria-label="Send"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
@@ -1233,6 +1505,7 @@ export default function Page() {
         <FacilitySection />
       </main>
       <Footer />
+      <AIAgent />
     </div>
   )
 }

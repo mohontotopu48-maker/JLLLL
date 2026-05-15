@@ -21,3 +21,30 @@ Stage Summary:
 - Camera-first mobile upload flow with base64 encoding
 - Designer Portal with invite-only dialog application
 - All images AI-generated with museum-quality photography prompts
+
+---
+Task ID: 2
+Agent: Z.ai Main Orchestrator
+Task: Add social media icons, AI agent, and Atelier footer redesign
+
+Work Log:
+- Created 4 SF Symbols-style SVG social icons (Instagram, LinkedIn, Facebook, Yelp) — ultra-thin, monochrome, zero background
+- Redesigned footer to 3-column Atelier layout: Col 1 Mission (brand + tagline), Col 2 Studio (address, phone, email), Col 3 Connect (social icons + CTA)
+- Social icons positioned bottom right with hover transition from white/40 to white
+- Added "Start Visual Quote 📷" CTA button in footer Col 3
+- Updated hero CTA from "Start Your Estimate" to "Start Visual Quote" with camera icon
+- Created floating AI Agent (JL Luxe-Architect) with glassmorphism tab at bottom-right
+- Tab: semi-transparent frosted glass (backdrop-blur-[20px]), circular camera glyph, "Analyze My Project" hover text
+- Chat panel: 520x380px glassmorphism panel with JL Atelier Concierge branding
+- Built /api/agent route using z-ai-web-dev-sdk with full JL Atelier Concierge system prompt
+- Agent follows behavioral prompt: photo request → analyze → material goal → handoff
+- Changed SVG logo fill to white (#FFFFFF) per user request
+- Changed dove icon height to match JL text (h-8 w-auto)
+- Lint passes clean, all pages compile with 200 status
+
+Stage Summary:
+- Atelier footer with 3-column layout and SF Symbols social icons
+- Floating AI chat agent with glassmorphism UI and LLM backend
+- Agent API responds with JL Atelier Concierge persona
+- Hero CTA updated to "Start Visual Quote 📷"
+- Logo color changed to white, sized to match JL text
