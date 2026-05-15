@@ -120,7 +120,12 @@ function Navigation() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex items-baseline gap-2">
+        <a href="#" className="flex items-center gap-2">
+          <img
+            src="/images/jl-logo.svg"
+            alt="JL Custom Upholstery Logo"
+            className="h-9 w-9"
+          />
           <span className="text-champagne text-2xl font-black tracking-tight">
             JL
           </span>
@@ -166,8 +171,15 @@ function Navigation() {
               className="bg-obsidian border-white/10 rounded-none w-72"
             >
               <SheetHeader>
-                <SheetTitle className="text-champagne text-left text-lg font-black">
-                  JL <span className="text-white font-light tracking-[0.2em] text-sm">CUSTOM UPHOLSTERY</span>
+                <SheetTitle className="flex items-center gap-2 text-left">
+                  <img
+                    src="/images/jl-logo.svg"
+                    alt="JL Logo"
+                    className="h-7 w-7"
+                  />
+                  <span className="text-champagne text-lg font-black">
+                    JL <span className="text-white font-light tracking-[0.2em] text-sm">CUSTOM UPHOLSTERY</span>
+                  </span>
                 </SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-6 pt-8">
@@ -1156,7 +1168,12 @@ function Footer() {
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between">
           {/* Brand */}
           <div>
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-center gap-2">
+              <img
+                src="/images/jl-logo.svg"
+                alt="JL Logo"
+                className="h-8 w-8"
+              />
               <span className="text-champagne text-2xl font-black tracking-tight">
                 JL
               </span>
