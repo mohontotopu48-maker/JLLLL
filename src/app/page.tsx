@@ -469,10 +469,10 @@ function SpecialistSection() {
 /* ──────────────────────────────── LEAD WIZARD ──────────────────────────────── */
 
 const projectTypes = [
-  { id: 'luxury-home', label: 'Luxury Home', icon: Home },
-  { id: 'commercial', label: 'Commercial / Hospitality', icon: Building2 },
-  { id: 'marine', label: 'Marine / RV', icon: Ship },
-  { id: 'classic-auto', label: 'Classic Auto', icon: Car },
+  { id: 'luxury-home', label: 'Home', icon: Home },
+  { id: 'commercial', label: 'Commercial', icon: Building2 },
+  { id: 'marine', label: 'Marine & RV', icon: Ship },
+  { id: 'classic-auto', label: 'Auto', icon: Car },
 ]
 
 const serviceTypes = [
@@ -561,14 +561,14 @@ function LeadWizard() {
   }
 
   return (
-    <section id="estimate" className="bg-stark py-24 md:py-32">
+    <section id="estimate" className="bg-obsidian py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <FadeInSection>
           <div className="text-center">
-            <h2 className="text-3xl font-black tracking-tight text-obsidian md:text-5xl">
+            <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">
               INSTANT PHOTO ESTIMATE
             </h2>
-            <p className="mt-3 text-sm font-light tracking-wide text-obsidian/50">
+            <p className="mt-3 text-sm font-light tracking-wide text-white/50">
               Four steps. Sixty seconds. A precision estimate.
             </p>
           </div>
@@ -585,7 +585,7 @@ function LeadWizard() {
                       className={`flex h-8 w-8 items-center justify-center text-xs font-bold transition-colors ${
                         s <= step
                           ? 'bg-champagne text-obsidian'
-                          : 'bg-obsidian/10 text-obsidian/40'
+                          : 'bg-white/10 text-white/40'
                       }`}
                     >
                       {s}
@@ -593,7 +593,7 @@ function LeadWizard() {
                     {s < 4 && (
                       <div
                         className={`h-[2px] w-12 sm:w-20 md:w-24 transition-colors ${
-                          s < step ? 'bg-champagne' : 'bg-obsidian/10'
+                          s < step ? 'bg-champagne' : 'bg-white/10'
                         }`}
                       />
                     )}
@@ -602,7 +602,7 @@ function LeadWizard() {
               </div>
               <Progress
                 value={(step / 4) * 100}
-                className="h-1 rounded-none bg-obsidian/10 [&>div]:bg-champagne"
+                className="h-1 rounded-none bg-white/10 [&>div]:bg-champagne"
               />
             </div>
 
@@ -617,10 +617,10 @@ function LeadWizard() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-lg font-semibold text-obsidian">
+                  <h3 className="text-lg font-semibold text-white">
                     What type of project?
                   </h3>
-                  <p className="mt-1 text-sm font-light text-obsidian/50">
+                  <p className="mt-1 text-sm font-light text-white/50">
                     Select the category that best describes your project.
                   </p>
                   <div className="mt-6 grid grid-cols-2 gap-4">
@@ -632,20 +632,20 @@ function LeadWizard() {
                           key={pt.id}
                           type="button"
                           onClick={() => setProjectType(pt.id)}
-                          className={`flex flex-col items-center justify-center gap-3 border p-6 transition-colors ${
+                          className={`flex flex-col items-center justify-center gap-3 border p-6 bg-obsidian transition-colors ${
                             selected
                               ? 'border-champagne bg-champagne/5'
-                              : 'border-obsidian/10 bg-white hover:border-obsidian/30'
+                              : 'border-white/10 hover:border-white/25'
                           }`}
                         >
                           <Icon
                             className={`h-8 w-8 ${
-                              selected ? 'text-champagne' : 'text-obsidian/40'
+                              selected ? 'text-champagne' : 'text-white/50'
                             }`}
                           />
                           <span
                             className={`text-xs font-medium tracking-wide ${
-                              selected ? 'text-champagne' : 'text-obsidian/60'
+                              selected ? 'text-champagne' : 'text-white/60'
                             }`}
                           >
                             {pt.label}
@@ -666,10 +666,10 @@ function LeadWizard() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-lg font-semibold text-obsidian">
+                  <h3 className="text-lg font-semibold text-white">
                     What service do you need?
                   </h3>
-                  <p className="mt-1 text-sm font-light text-obsidian/50">
+                  <p className="mt-1 text-sm font-light text-white/50">
                     Choose the service type for your project.
                   </p>
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -683,7 +683,7 @@ function LeadWizard() {
                           className={`border px-6 py-3 text-sm font-medium tracking-wide transition-colors ${
                             selected
                               ? 'border-champagne bg-champagne text-obsidian'
-                              : 'border-obsidian/10 bg-white text-obsidian/60 hover:border-obsidian/30'
+                              : 'border-white/10 bg-white/5 text-white/60 hover:border-white/25'
                           }`}
                         >
                           {st.label}
@@ -703,10 +703,10 @@ function LeadWizard() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-lg font-semibold text-obsidian">
+                  <h3 className="text-lg font-semibold text-white">
                     Upload a photo of your piece
                   </h3>
-                  <p className="mt-1 text-sm font-light text-obsidian/50">
+                  <p className="mt-1 text-sm font-light text-white/50">
                     A photo helps us provide a more accurate estimate. This step
                     is optional.
                   </p>
@@ -716,7 +716,7 @@ function LeadWizard() {
                         <img
                           src={photoPreview}
                           alt="Uploaded preview"
-                          className="h-48 w-auto border border-obsidian/10 object-cover"
+                          className="h-48 w-auto border border-white/10 object-cover"
                         />
                         <button
                           type="button"
@@ -732,18 +732,18 @@ function LeadWizard() {
                     ) : (
                       <label
                         htmlFor="photo-upload"
-                        className="flex min-h-[200px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed border-obsidian/20 bg-white transition-colors hover:border-champagne/50 hover:bg-champagne/5"
+                        className="flex min-h-[200px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed border-white/15 bg-white/5 transition-colors hover:border-champagne/50 hover:bg-champagne/5"
                       >
-                        <Camera className="h-10 w-10 text-obsidian/30" />
+                        <Camera className="h-10 w-10 text-white/30" />
                         <div className="text-center">
-                          <p className="text-sm font-medium text-obsidian/60">
+                          <p className="text-sm font-medium text-white/60">
                             Upload a Photo of Your Piece
                           </p>
-                          <p className="mt-1 text-xs font-light text-obsidian/40 md:hidden">
+                          <p className="mt-1 text-xs font-light text-white/40 md:hidden">
                             Tap to snap a photo now for a precision estimate.
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-obsidian/40">
+                        <div className="flex items-center gap-2 text-xs text-white/40">
                           <Upload className="h-3 w-3" />
                           <span>Click or drag to upload</span>
                         </div>
@@ -771,7 +771,7 @@ function LeadWizard() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-obsidian">
+                    <h3 className="text-lg font-semibold text-white">
                       Your contact information
                     </h3>
                     {leadScore > 0 && (
@@ -783,14 +783,14 @@ function LeadWizard() {
                       </Badge>
                     )}
                   </div>
-                  <p className="mt-1 text-sm font-light text-obsidian/50">
+                  <p className="mt-1 text-sm font-light text-white/50">
                     We&apos;ll respond with your estimate within 24 hours.
                   </p>
                   <div className="mt-6 space-y-4">
                     <div>
                       <Label
                         htmlFor="lead-name"
-                        className="text-xs font-medium tracking-wide text-obsidian/60 uppercase"
+                        className="text-xs font-medium tracking-wide text-white/60 uppercase"
                       >
                         Name
                       </Label>
@@ -799,13 +799,13 @@ function LeadWizard() {
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
                         placeholder="Your full name"
-                        className="mt-1 rounded-none border-obsidian/20 bg-white focus-visible:ring-champagne"
+                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
                       />
                     </div>
                     <div>
                       <Label
                         htmlFor="lead-phone"
-                        className="text-xs font-medium tracking-wide text-obsidian/60 uppercase"
+                        className="text-xs font-medium tracking-wide text-white/60 uppercase"
                       >
                         Phone
                       </Label>
@@ -815,13 +815,13 @@ function LeadWizard() {
                         value={contactPhone}
                         onChange={(e) => setContactPhone(e.target.value)}
                         placeholder="(555) 000-0000"
-                        className="mt-1 rounded-none border-obsidian/20 bg-white focus-visible:ring-champagne"
+                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
                       />
                     </div>
                     <div>
                       <Label
                         htmlFor="lead-email"
-                        className="text-xs font-medium tracking-wide text-obsidian/60 uppercase"
+                        className="text-xs font-medium tracking-wide text-white/60 uppercase"
                       >
                         Email
                       </Label>
@@ -831,11 +831,11 @@ function LeadWizard() {
                         value={contactEmail}
                         onChange={(e) => setContactEmail(e.target.value)}
                         placeholder="you@example.com"
-                        className="mt-1 rounded-none border-obsidian/20 bg-white focus-visible:ring-champagne"
+                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
                       />
                     </div>
                   </div>
-                  <p className="mt-4 text-xs font-light text-obsidian/40">
+                  <p className="mt-4 text-xs font-light text-white/30">
                     Your information is never shared. Period.
                   </p>
                 </motion.div>
@@ -849,7 +849,7 @@ function LeadWizard() {
                   type="button"
                   variant="ghost"
                   onClick={() => setStep(step - 1)}
-                  className="rounded-none text-obsidian/60 hover:text-obsidian"
+                  className="rounded-none text-white/60 hover:text-white"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" /> Back
                 </Button>
