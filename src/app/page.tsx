@@ -968,20 +968,24 @@ function DesignerPortalSection() {
         </FadeInSection>
 
         <FadeInSection delay={0.25}>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button
-              onClick={() => setDialogOpen(true)}
-              className="bg-champagne text-obsidian h-12 rounded-none px-8 text-sm font-semibold tracking-wide hover:bg-champagne-light"
-            >
-              Request Access
-            </Button>
-            <Button
-              variant="outline"
-              className="h-12 rounded-none border-white/30 px-8 text-sm font-light tracking-wide text-white hover:bg-white/10 hover:text-white"
-            >
-              Learn More
-            </Button>
-          </div>
+          <div className="mt-10 flex flex-col items-center justify-center sm:flex-row sm:gap-4">
+              <a className="w-full max-w-[320px] sm:w-auto">
+                <Button
+                  onClick={() => setDialogOpen(true)}
+                  className="bg-champagne text-obsidian h-12 rounded-none w-full sm:w-auto px-8 text-sm font-semibold tracking-wide hover:bg-champagne-light"
+                >
+                  Request Access
+                </Button>
+              </a>
+              <a className="w-full max-w-[320px] sm:w-auto mt-3 sm:mt-0">
+                <Button
+                  variant="outline"
+                  className="h-12 rounded-none border border-white w-full sm:w-auto px-8 text-sm font-light tracking-wide text-white bg-transparent hover:bg-white/10 hover:text-white transition-colors duration-200 shadow-none"
+                >
+                  Member Log In →
+                </Button>
+              </a>
+            </div>
         </FadeInSection>
 
         <FadeInSection delay={0.35}>
