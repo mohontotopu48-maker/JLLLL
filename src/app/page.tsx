@@ -531,24 +531,44 @@ function SpecialistSection() {
 function VideoShowcase() {
   return (
     <section className="bg-obsidian py-24 md:py-32">
-      <div className="jl-video-section-wrapper">
+      <div className="jl-video-vertical-stack">
+        {/* Video 1 — Marine */}
         <FadeInSection>
-          <div className="jl-video-text-content">
-            <h2 className="jl-video-title">Craftsmanship In Motion</h2>
-            <p className="jl-video-subtitle">
-              Watch our exact multi-stage restoration process, transforming weather-beaten marine interiors back to immaculate showroom quality.
-            </p>
+          <div className="jl-video-item">
+            <div className="jl-video-header">
+              <h3 className="jl-video-item-title">I. Marine Restoration Architecture</h3>
+              <p className="jl-video-item-subtitle">
+                A deep-dive look at our comprehensive multi-stage rebuilding process for high-end marine seating and open-water canvas environments.
+              </p>
+            </div>
+            <div className="jl-video-container">
+              <iframe
+                src="https://www.youtube.com/embed/dM724CSqIC0?rel=0&modestbranding=1"
+                title="Marine Showcase"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           </div>
         </FadeInSection>
 
+        {/* Video 2 — Auto & Custom */}
         <FadeInSection delay={0.15}>
-          <div className="jl-video-container">
-            <iframe
-              src="https://www.youtube.com/embed/dM724CSqIC0?rel=0&modestbranding=1"
-              title="JL Custom Upholstery Marine Showcase"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+          <div className="jl-video-item">
+            <div className="jl-video-header">
+              <h3 className="jl-video-item-title">II. Precision Auto &amp; Interior Craftsmanship</h3>
+              <p className="jl-video-item-subtitle">
+                Showcasing structural frame sculpting, premium leather hide selection, and intricate double-stitch piping lines for custom automotive and specialty assets.
+              </p>
+            </div>
+            <div className="jl-video-container">
+              <iframe
+                src="https://www.youtube.com/embed/2SzwcFDyR_I?rel=0&modestbranding=1"
+                title="Auto and Interior Showcase"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           </div>
         </FadeInSection>
       </div>

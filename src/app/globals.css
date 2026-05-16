@@ -205,29 +205,37 @@
   filter: drop-shadow(0 0 3px #C5A880) drop-shadow(0 0 10px rgba(197, 168, 128, 0.8));
 }
 
-/* ── Video showcase section ── */
-.jl-video-section-wrapper {
-  max-width: 960px;
+/* ── Video showcase section — dual vertical stack ── */
+.jl-video-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 840px;
   margin: 0 auto;
   padding: 0 20px;
+}
+.jl-video-item {
+  width: 100%;
+}
+.jl-video-header {
+  margin-bottom: 20px;
   text-align: center;
 }
-.jl-video-text-content {
-  margin-bottom: 30px;
-}
-.jl-video-title {
-  font-size: 2.2rem;
-  color: #FFFFFF;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
+.jl-video-item-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #C5A880;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
-.jl-video-subtitle {
-  font-size: 1.1rem;
+.jl-video-item-subtitle {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
   color: #A0A0A0;
-  max-width: 650px;
+  max-width: 660px;
   margin: 0 auto;
-  line-height: 1.6;
 }
 .jl-video-container {
   position: relative;
@@ -236,9 +244,8 @@
   height: 0;
   overflow: hidden;
   border: 1px solid #222222;
-  border-radius: 4px;
   background-color: #000000;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
 .jl-video-container iframe {
   position: absolute;
