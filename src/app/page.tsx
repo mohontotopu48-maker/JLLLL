@@ -1326,14 +1326,7 @@ function FacilitySection() {
 
 /* ──────────────────────────────── FOOTER ──────────────────────────────── */
 
-/* ── Social icon data (href + label only — SVGs are inline in Footer) ── */
-const socialLinks = [
-  { href: 'https://facebook.com/jlcustomupholstery', label: 'Facebook' },
-  { href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
-  { href: 'https://yelp.com/biz/jl-custom-upholstery-anaheim', label: 'Yelp' },
-  { href: 'https://nextdoor.com/pages/jl-custom-upholstery', label: 'Nextdoor' },
-  { href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
-]
+
 
 function Footer() {
   return (
@@ -1416,72 +1409,21 @@ function Footer() {
             <h4 className="text-xs font-medium tracking-[0.2em] text-white/40 uppercase">
               Connect
             </h4>
-            <div className="mt-4 flex items-center justify-center gap-6">
-              {/* Facebook */}
-              <a
-                href={socialLinks[0].href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={socialLinks[0].label}
-                className="social-icon-link"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
+            <div className="jl-footer-socials">
+              <a className="jl-social-link" href="https://facebook.com/jlcustomupholstery" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8z"/></svg>
               </a>
-              {/* Instagram */}
-              <a
-                href={socialLinks[1].href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={socialLinks[1].label}
-                className="social-icon-link"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="2" width="20" height="20" rx="5" />
-                  <circle cx="12" cy="12" r="5" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="#FFFFFF" stroke="none" />
-                </svg>
+              <a className="jl-social-link" href="https://instagram.com/jlcustomupholstery" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
               </a>
-              {/* Yelp */}
-              <a
-                href={socialLinks[2].href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={socialLinks[2].label}
-                className="social-icon-link"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L14.1 8.5L21 9.2L15.8 13.8L17.4 20.5L12 17L6.6 20.5L8.2 13.8L3 9.2L9.9 8.5Z" />
-                </svg>
+              <a className="jl-social-link" href="https://yelp.com/biz/jl-custom-upholstery-anaheim" target="_blank" rel="noopener noreferrer" aria-label="Yelp">
+                <svg viewBox="0 0 24 24"><path d="M12.2 12.9l3.2 4.5s.4.5.1.8c-.3.3-.8.2-1.2 0l-4.5-2.2-1.2.9c-.8.6-1.5 1.3-2.3 1.9-.4.3-.9.2-1-.3-.1-.3-.1-.5 0-.7l2-4.7-4-1.3c-.5-.2-.7-.6-.5-1 .2-.4.6-.6 1.1-.4l5 1.1.2-4.9c0-.5.4-.9.9-.9.5 0 .9.3.9.8l.2 4.5 3-3.1c.3-.4.9-.4 1.2-.1.4.3.4.8.1 1.2l-3.2 3.3z"/></svg>
               </a>
-              {/* Nextdoor */}
-              <a
-                href={socialLinks[3].href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={socialLinks[3].label}
-                className="social-icon-link"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 3L3 10V21H9V14H15V21H21V10L12 3Z" />
-                  <text x="12" y="16.5" textAnchor="middle" fill="#111111" fontSize="6" fontWeight="700" fontFamily="sans-serif">nd</text>
-                </svg>
+              <a className="jl-social-link" href="https://nextdoor.com/pages/jl-custom-upholstery" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor">
+                <svg viewBox="0 0 24 24"><path d="M19 9.3V4h-3v2.6L12 3 2 12h3v9h5v-6h4v6h5v-9h3L19 9.3zm-5.5 4.2c-.4.4-1 .5-1.5.2-.2-.1-.3-.3-.4-.5v.3c0 .6-.4 1-1 1s-1-.4-1-1v-2.1c0-.6.4-1 1-1s1 .4 1 1v.7c.1-.2.3-.4.5-.5.5-.3 1.1-.2 1.5.2.4.4.5 1.1.5 1.6 0 .5-.2 1.1-.6 1.5z"/></svg>
               </a>
-              {/* LinkedIn */}
-              <a
-                href={socialLinks[4].href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={socialLinks[4].label}
-                className="social-icon-link"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="2" width="20" height="20" rx="3" />
-                  <circle cx="8" cy="8" r="1.5" fill="#111111" />
-                  <rect x="6.5" y="11" width="3" height="8" rx="0.5" fill="#111111" />
-                  <path d="M12 11v8h3v-4.5c0-1.5 1-2.5 2-2.5s2 1 2 2.5V19h3v-5c0-3-1.5-4-4-4s-3 1-3.5 2" fill="#111111" />
-                </svg>
+              <a className="jl-social-link" href="https://linkedin.com/company/jlcustomupholstery" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
             </div>
             <div className="mt-6">
