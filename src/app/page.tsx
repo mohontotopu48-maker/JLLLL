@@ -1326,61 +1326,13 @@ function FacilitySection() {
 
 /* ──────────────────────────────── FOOTER ──────────────────────────────── */
 
-/* SF Symbols–style ultra-thin monochrome social glyphs */
-function InstagramIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="5" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-
-function LinkedInIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
-      <rect x="2" y="2" width="20" height="20" rx="3" />
-      <line x1="8" y1="11" x2="8" y2="16" />
-      <line x1="8" y1="8" x2="8" y2="8.01" strokeWidth={2} strokeLinecap="round" />
-      <path d="M12 16v-5a2 2 0 0 1 4 0v5" />
-      <line x1="12" y1="11" x2="12" y2="16" />
-    </svg>
-  )
-}
-
-function FacebookIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  )
-}
-
-function YelpIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-      {/* Yelp burst logo — stylized 5-petal burst */}
-      <path d="M12 2L14.1 8.5L21 9.2L15.8 13.8L17.4 20.5L12 17L6.6 20.5L8.2 13.8L3 9.2L9.9 8.5Z" fill="currentColor" />
-    </svg>
-  )
-}
-
-function NextdoorIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-      {/* Nextdoor house 'nd' logo */}
-      <path d="M12 3L3 10V21H9V14H15V21H21V10L12 3Z" fill="currentColor" />
-    </svg>
-  )
-}
-
+/* ── Social icon data (href + label only — SVGs are inline in Footer) ── */
 const socialLinks = [
-  { Icon: FacebookIcon, href: 'https://facebook.com/jlcustomupholstery', label: 'Facebook' },
-  { Icon: InstagramIcon, href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
-  { Icon: YelpIcon, href: 'https://yelp.com/biz/jl-custom-upholstery-anaheim', label: 'Yelp' },
-  { Icon: NextdoorIcon, href: 'https://nextdoor.com/pages/jl-custom-upholstery', label: 'Nextdoor' },
-  { Icon: LinkedInIcon, href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
+  { href: 'https://facebook.com/jlcustomupholstery', label: 'Facebook' },
+  { href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
+  { href: 'https://yelp.com/biz/jl-custom-upholstery-anaheim', label: 'Yelp' },
+  { href: 'https://nextdoor.com/pages/jl-custom-upholstery', label: 'Nextdoor' },
+  { href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
 ]
 
 function Footer() {
@@ -1465,18 +1417,72 @@ function Footer() {
               Connect
             </h4>
             <div className="mt-4 flex items-center justify-center gap-6">
-              {socialLinks.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="social-icon-link"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              ))}
+              {/* Facebook */}
+              <a
+                href={socialLinks[0].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={socialLinks[0].label}
+                className="social-icon-link"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a
+                href={socialLinks[1].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={socialLinks[1].label}
+                className="social-icon-link"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="5" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="#FFFFFF" stroke="none" />
+                </svg>
+              </a>
+              {/* Yelp */}
+              <a
+                href={socialLinks[2].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={socialLinks[2].label}
+                className="social-icon-link"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.1 8.5L21 9.2L15.8 13.8L17.4 20.5L12 17L6.6 20.5L8.2 13.8L3 9.2L9.9 8.5Z" />
+                </svg>
+              </a>
+              {/* Nextdoor */}
+              <a
+                href={socialLinks[3].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={socialLinks[3].label}
+                className="social-icon-link"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3L3 10V21H9V14H15V21H21V10L12 3Z" />
+                  <text x="12" y="16.5" textAnchor="middle" fill="#111111" fontSize="6" fontWeight="700" fontFamily="sans-serif">nd</text>
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a
+                href={socialLinks[4].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={socialLinks[4].label}
+                className="social-icon-link"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="2" width="20" height="20" rx="3" />
+                  <circle cx="8" cy="8" r="1.5" fill="#111111" />
+                  <rect x="6.5" y="11" width="3" height="8" rx="0.5" fill="#111111" />
+                  <path d="M12 11v8h3v-4.5c0-1.5 1-2.5 2-2.5s2 1 2 2.5V19h3v-5c0-3-1.5-4-4-4s-3 1-3.5 2" fill="#111111" />
+                </svg>
+              </a>
             </div>
             <div className="mt-6">
               <a href="#estimate">
