@@ -118,10 +118,10 @@ function Navigation() {
         scrolled ? 'bg-obsidian/95 backdrop-blur-md' : 'bg-obsidian'
       }`}
     >
-      {/* Three-zone layout */}
-      <div className="mx-auto grid h-16 max-w-7xl grid-cols-3 items-center px-4 sm:px-6 lg:px-8">
-        {/* Left Zone: Logo */}
-        <a href="#" className="flex items-center gap-2 justify-self-start">
+      {/* Three-zone layout — flex on mobile, grid on desktop */}
+      <div className="mx-auto flex h-16 w-full items-center justify-between px-6 md:grid md:max-w-7xl md:grid-cols-3 md:px-4 lg:md:px-8">
+        {/* Left Zone: Logo — flush left */}
+        <a href="#" className="flex items-center gap-2 shrink-0 md:justify-self-start">
           <img
             src="/images/jl-logo.svg"
             alt="JL Custom Upholstery Logo"
@@ -135,8 +135,8 @@ function Navigation() {
           </span>
         </a>
 
-        {/* Center Zone: Nav links — perfectly centered in viewport */}
-        <div className="hidden items-center justify-center gap-8 md:flex justify-self-center">
+        {/* Center Zone: Nav links — perfectly centered in viewport (desktop only) */}
+        <div className="hidden items-center justify-center gap-8 md:flex md:justify-self-center">
           {links.map((l) => (
             <a
               key={l.href}
@@ -148,8 +148,8 @@ function Navigation() {
           ))}
         </div>
 
-        {/* Right Zone: CTA button */}
-        <div className="hidden md:flex justify-self-end">
+        {/* Right Zone: CTA button (desktop only) */}
+        <div className="hidden md:flex md:justify-self-end">
           <a href="#estimate">
             <Button
               className="bg-champagne text-obsidian h-9 rounded-none px-6 text-sm font-semibold tracking-wide hover:bg-champagne-light"
@@ -159,8 +159,8 @@ function Navigation() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
-        <div className="md:hidden justify-self-end">
+        {/* Mobile hamburger — flush right */}
+        <div className="md:hidden shrink-0 ml-auto pl-4">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button
