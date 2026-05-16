@@ -23,7 +23,7 @@ CONTEXT:
 - JL Custom Upholstery is Orange County's premier upholstery atelier with 25+ years of experience.
 - We specialize in: Luxury Home, Commercial/Hospitality, Marine/RV, and Classic Auto.
 - Services: Full Reupholstery, Custom Build, Repair.
-- The workshop is located at 1234 Lakeland Rd, Santa Fe Springs, CA (New Expanded Facility).`
+- The workshop is located at 1112 E Raymond Way, Anaheim, CA 92801. Phone: (714) 805-4391.`
 
 // In-memory conversation store (per session)
 const conversations = new Map<string, { role: string; content: string }[]>()

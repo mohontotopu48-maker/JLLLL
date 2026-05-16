@@ -1319,7 +1319,7 @@ function NextdoorIcon({ className = '' }: { className?: string }) {
 const socialLinks = [
   { Icon: FacebookIcon, href: 'https://facebook.com/jlcustomupholstery', label: 'Facebook' },
   { Icon: InstagramIcon, href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
-  { Icon: YelpIcon, href: 'https://yelp.com/biz/jl-custom-upholstery-santa-fe-springs', label: 'Yelp' },
+  { Icon: YelpIcon, href: 'https://yelp.com/biz/jl-custom-upholstery-anaheim', label: 'Yelp' },
   { Icon: NextdoorIcon, href: 'https://nextdoor.com/pages/jl-custom-upholstery', label: 'Nextdoor' },
   { Icon: LinkedInIcon, href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
 ]
@@ -1349,23 +1349,53 @@ function Footer() {
             </p>
           </div>
 
-          {/* Col 2: Studio */}
-          <div>
-            <h4 className="text-xs font-medium tracking-[0.2em] text-white/40 uppercase">
+          {/* Col 2: Studio — structured location block */}
+          <div
+            style={{
+              background: '#111111',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              padding: '24px',
+            }}
+          >
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: '#C5A880' }}>
               Atelier
             </h4>
-            <div className="mt-4 space-y-3">
-              <div className="flex items-center gap-2 text-sm font-light text-white/60">
-                <MapPin className="h-3.5 w-3.5 text-champagne/70" />
-                Anaheim, CA
+            <div className="mt-5 space-y-4">
+              <div>
+                <span className="block text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: '#C5A880' }}>
+                  Address
+                </span>
+                <span className="mt-1 flex items-start gap-2 text-sm font-light text-white/80">
+                  <MapPin className="h-3.5 w-3.5 mt-0.5 shrink-0 text-champagne/70" />
+                  1112 E Raymond Way, Anaheim, CA 92801
+                </span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-light text-white/60">
-                <Phone className="h-3.5 w-3.5 text-champagne/70" />
-                (714) 555-0100
+              <div>
+                <span className="block text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: '#C5A880' }}>
+                  Phone
+                </span>
+                <span className="mt-1 flex items-center gap-2 text-sm font-light text-white/80">
+                  <Phone className="h-3.5 w-3.5 shrink-0 text-champagne/70" />
+                  (714) 805-4391
+                </span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-light text-white/60">
-                <Mail className="h-3.5 w-3.5 text-champagne/70" />
-                info@jlcustomupholstery.com
+              <div>
+                <span className="block text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: '#C5A880' }}>
+                  Studio Hours
+                </span>
+                <span className="mt-1 flex items-center gap-2 text-sm font-light text-white/80">
+                  <Clock className="h-3.5 w-3.5 shrink-0 text-champagne/70" />
+                  Mon–Fri 8 AM – 5 PM
+                </span>
+              </div>
+              <div>
+                <span className="block text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: '#C5A880' }}>
+                  Email
+                </span>
+                <span className="mt-1 flex items-center gap-2 text-sm font-light text-white/80">
+                  <Mail className="h-3.5 w-3.5 shrink-0 text-champagne/70" />
+                  info@jlcustomupholstery.com
+                </span>
               </div>
             </div>
           </div>
@@ -1409,30 +1439,46 @@ function Footer() {
 function UtilityBar() {
   return (
     <div className="bg-black border-t border-white/10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 py-5 md:flex-row md:justify-between md:gap-0 md:px-10 md:py-5">
-        <p className="text-xs font-light tracking-wide text-white/40">
-          &copy; 2026 JL Custom Upholstery. All rights reserved.
-        </p>
-        <p className="text-xs font-light tracking-wide text-white/40">
-          Powered by{' '}
-          <a
-            href="https://nxlbyldr.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#C5A880] transition-colors duration-200 hover:text-[#d4c09e]"
-          >
-            NXLBYLDR CRM
-          </a>
-          {' | '}managed by{' '}
-          <a
-            href="https://vsualdigitalmedia.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#C5A880] transition-colors duration-200 hover:text-[#d4c09e]"
-          >
-            VSUALdigitalmedia.com
-          </a>
-        </p>
+      <div className="mx-auto max-w-7xl px-6 py-6 md:px-10 md:py-7">
+        {/* Main copyright and description */}
+        <div className="flex flex-col gap-4 md:flex-row md:justify-between md:gap-8">
+          <div className="flex-1">
+            <p className="text-xs font-light tracking-wide text-white/50">
+              &copy; 2026 JL Custom Upholstery. All rights reserved.
+            </p>
+            <p className="mt-2 text-xs font-light leading-relaxed text-white/35">
+              JL Custom Upholstery is a premier Orange County workshop providing master craftsmanship in residential furniture, hospitality layouts, and automotive/marine interiors. Quality is our foundational priority. We source elite, high-grade materials and guarantee all structural execution.
+            </p>
+          </div>
+          <div className="shrink-0 md:text-right">
+            <p className="text-xs font-light tracking-wide text-white/50">
+              1112 E Raymond Way, Anaheim, CA 92801
+            </p>
+            <p className="mt-1 text-xs font-light tracking-wide text-white/50">
+              (714) 805-4391
+            </p>
+            <p className="mt-3 text-[10px] font-light tracking-wide text-white/25">
+              Powered by{' '}
+              <a
+                href="https://nxlbyldr.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#C5A880] transition-colors duration-200 hover:text-[#d4c09e]"
+              >
+                NXLBYLDR CRM
+              </a>
+              {' | '}managed by{' '}
+              <a
+                href="https://vsualdigitalmedia.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#C5A880] transition-colors duration-200 hover:text-[#d4c09e]"
+              >
+                VSUALdigitalmedia.com
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
