@@ -1300,21 +1300,28 @@ function FacebookIcon({ className = '' }: { className?: string }) {
 
 function YelpIcon({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className={className}>
-      <path d="M10.5 2.5c0 0-1 3-1 5s1 3 2 3 2-1 2-3-1-5-1-5" />
-      <path d="M4 7c0 0 2.5 1.5 4 2.5s2 2 1.5 3-2 1-3.5 0S3 8 3 8" />
-      <path d="M4 17c0 0 2.5-1.5 4-2.5s2-2 1.5-3-2-1-3.5 0S3 16 3 16" />
-      <path d="M13.5 14.5c0 0 1 3 1 5s-1 3-2 3-2-1-2-3 1-5 1-5" />
-      <path d="M17.5 12.5c0 0-2.5-1.5-4-2.5s-2-2-1.5-3 2-1 3.5 0S21 8 21 8" />
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      {/* Yelp burst logo — stylized 5-petal burst */}
+      <path d="M12 2L14.1 8.5L21 9.2L15.8 13.8L17.4 20.5L12 17L6.6 20.5L8.2 13.8L3 9.2L9.9 8.5Z" fill="currentColor" />
+    </svg>
+  )
+}
+
+function NextdoorIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      {/* Nextdoor house 'nd' logo */}
+      <path d="M12 3L3 10V21H9V14H15V21H21V10L12 3Z" fill="currentColor" />
     </svg>
   )
 }
 
 const socialLinks = [
-  { Icon: InstagramIcon, href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
-  { Icon: LinkedInIcon, href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
   { Icon: FacebookIcon, href: 'https://facebook.com/jlcustomupholstery', label: 'Facebook' },
+  { Icon: InstagramIcon, href: 'https://instagram.com/jlcustomupholstery', label: 'Instagram' },
   { Icon: YelpIcon, href: 'https://yelp.com/biz/jl-custom-upholstery-santa-fe-springs', label: 'Yelp' },
+  { Icon: NextdoorIcon, href: 'https://nextdoor.com/pages/jl-custom-upholstery', label: 'Nextdoor' },
+  { Icon: LinkedInIcon, href: 'https://linkedin.com/company/jlcustomupholstery', label: 'LinkedIn' },
 ]
 
 function Footer() {
@@ -1368,7 +1375,7 @@ function Footer() {
             <h4 className="text-xs font-medium tracking-[0.2em] text-white/40 uppercase">
               Connect
             </h4>
-            <div className="mt-4 flex items-center gap-5 md:justify-end">
+            <div className="mt-4 flex items-center justify-center gap-6">
               {socialLinks.map(({ Icon, href, label }) => (
                 <a
                   key={label}
@@ -1376,7 +1383,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="text-white/40 transition-colors duration-200 hover:text-white"
+                  className="social-icon-link"
                 >
                   <Icon className="h-5 w-5" />
                 </a>

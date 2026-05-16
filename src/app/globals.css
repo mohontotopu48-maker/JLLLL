@@ -185,3 +185,25 @@
          drop-shadow(0 0 25px rgba(197, 168, 128, 0.95));
   transition: filter 0.1s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+/* ── Social icon warm-gold neon ring hover ── */
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  transition: filter 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-icon-link svg {
+  transition: filter 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-icon-link:hover {
+  transform: scale(1.1);
+}
+
+.social-icon-link:hover svg {
+  filter: drop-shadow(0 0 4px #C5A880) drop-shadow(0 0 12px rgba(197, 168, 128, 0.7));
+}
