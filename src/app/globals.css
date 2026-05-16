@@ -160,7 +160,7 @@
   outline-offset: 2px;
 }
 
-/* ── Dove logo radial gold glow ── */
+/* ── Dove logo gold halo ring ── */
 .logo-container {
   position: relative;
   display: inline-flex;
@@ -169,10 +169,11 @@
 
 .logo-container .dove-svg {
   filter: none;
-  transition: filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: filter 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .logo-container:hover .dove-svg {
-  filter: drop-shadow(0 0 15px rgba(197, 168, 128, 0.65))
-         drop-shadow(0 0 30px rgba(197, 168, 128, 0.3));
+  filter: drop-shadow(0 0 2px #C5A880)
+         drop-shadow(0 0 10px #C5A880)
+         drop-shadow(0 0 20px rgba(197, 168, 128, 0.8));
 }
