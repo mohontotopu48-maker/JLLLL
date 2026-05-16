@@ -21,6 +21,10 @@ import {
   Shield,
   Clock,
   Send,
+  Crosshair,
+  Timer,
+  BadgeDollarSign,
+  HeartHandshake,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -298,55 +302,110 @@ function HeroSection() {
   )
 }
 
-/* ──────────────────────────────── EDITORIAL SEGMENTS ──────────────────────────────── */
+/* ──────────────────────────────── CORE PILLARS + HERITAGE ──────────────────────────────── */
 
-const editorials = [
+const corePillars = [
   {
-    label: 'The Principle',
-    headline: 'Our Founding Principle',
-    body: 'The initials JL stand for Jesus is Lord. To us, this isn\u2019t just a name\u2014it is an absolute commitment to structural integrity, transparent pricing, and treating every client\u2019s asset with the highest level of care and respect.',
+    icon: Crosshair,
+    title: 'Precision Craftsmanship',
+    body: 'Our quality, stitch lines, and structural restoration standards are executed with absolute seriousness.',
   },
   {
-    label: 'The Infrastructure',
-    headline: 'High-Capacity Atelier',
-    body: 'To meet growing demand from Orange County\u2019s elite design firms, we expanded our operations to our current state-of-the-art facility in Anaheim. This expanded footprint gives our master craftsmen the physical scale to seamlessly execute large-scale commercial contracts, luxury marine overhauls, and pristine automotive restorations\u2014while maintaining the meticulous, hands-on oversight of a dedicated private studio.',
+    icon: Timer,
+    title: 'Dedicated Timelines',
+    body: 'We value your schedule and are committed to delivering master-level completions on time.',
   },
   {
-    label: 'The Heritage',
-    headline: 'Quarter-Century of Master Craftsmanship',
-    body: 'True upholstery is an architectural art form. With more than 25 years of specialized expertise in fine textiles, structural frame repair, and precision double-stitching, our team revives historical heirlooms and constructs custom modern furniture to architectural specifications. If a frame has good bones, we ensure its second life outlasts its first.',
+    icon: BadgeDollarSign,
+    title: 'Transparent Value',
+    body: 'We offer highly competitive, upfront pricing without ever compromising on elite material grades.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Client-First Philosophy',
+    body: 'We treat every heirloom, vehicle, and commercial project with dedicated care and personal focus.',
   },
 ]
 
 function MissionSection() {
   return (
-    <section id="craft" className="bg-stark py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        {editorials.map((ed, i) => (
-          <FadeInSection key={ed.label} delay={i * 0.1}>
+    <section id="craft" className="py-24 md:py-32" style={{ background: '#111111' }}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <FadeInSection>
+          <div className="text-center">
+            <p className="text-xs font-semibold tracking-[0.25em] uppercase" style={{ color: '#C5A880' }}>
+              Our Foundation
+            </p>
+            <h2 className="mt-3 text-3xl font-black tracking-tight text-white md:text-5xl">
+              THE JL STANDARD
+            </h2>
+            <p className="mt-3 text-sm font-light tracking-wide text-white/40">
+              Four pillars. One unwavering commitment.
+            </p>
+          </div>
+        </FadeInSection>
+
+        {/* 4-column pillar grid */}
+        <FadeInSection delay={0.15}>
+          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6">
+            {corePillars.map((pillar, i) => {
+              const Icon = pillar.icon
+              return (
+                <div
+                  key={pillar.title}
+                  className="flex flex-col items-center text-center"
+                  style={{
+                    padding: '32px 20px',
+                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    background: 'rgba(255, 255, 255, 0.02)',
+                  }}
+                >
+                  <Icon
+                    className="h-7 w-7 stroke-[1]"
+                    style={{ color: '#C5A880' }}
+                  />
+                  <h3
+                    className="mt-5 text-sm font-bold tracking-[0.08em] uppercase"
+                    style={{ color: '#C5A880' }}
+                  >
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-3 text-[13px] font-light leading-relaxed text-white/60">
+                    {pillar.body}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+        </FadeInSection>
+
+        {/* Heritage origin snippet — The Fullerton Connection */}
+        <FadeInSection delay={0.25}>
+          <div className="mt-20 md:mt-24">
             <div
-              className={`${
-                i > 0 ? 'mt-20 md:mt-28' : ''
-              } ${
-                i % 2 === 0 ? 'md:text-left' : 'md:text-right'
-              } text-center`}
+              className="mx-auto max-w-3xl text-center"
+              style={{
+                padding: '40px 32px',
+                borderTop: '1px solid rgba(197, 168, 128, 0.15)',
+                borderBottom: '1px solid rgba(197, 168, 128, 0.15)',
+              }}
             >
-              <p className="text-xs font-medium tracking-[0.25em] text-champagne/70 uppercase">
-                {ed.label}
-              </p>
-              <h2 className="mt-3 text-3xl font-black tracking-tight text-obsidian md:text-5xl">
-                {ed.headline}
-              </h2>
               <p
-                className={`mt-6 max-w-2xl text-base font-light leading-relaxed text-obsidian/70 md:text-lg ${
-                  i % 2 === 0 ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'
-                } mx-auto`}
+                className="text-xs font-semibold tracking-[0.25em] uppercase"
+                style={{ color: '#C5A880' }}
               >
-                {ed.body}
+                The Fullerton Connection
+              </p>
+              <h3 className="mt-4 text-2xl font-black tracking-tight text-white md:text-3xl">
+                Our Origin
+              </h3>
+              <p className="mt-5 text-sm font-light leading-[1.85] text-white/60 md:text-base">
+                Located on the Anaheim-Fullerton border, JL Custom Upholstery delivers precision craftsmanship built on decades of local heritage. Our doors first opened just across the street in Fullerton; today, we operate a premier Orange County workshop specializing in large-scale transformations for classic cars, luxury marine vessels, custom RVs, and high-end residential spaces.
               </p>
             </div>
-          </FadeInSection>
-        ))}
+          </div>
+        </FadeInSection>
       </div>
     </section>
   )
