@@ -226,12 +226,13 @@ function HeroSection() {
       />
       <div className="absolute inset-0 bg-obsidian/70" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 pt-16 text-center sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-16 text-center sm:px-6 md:px-8 lg:px-8">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl"
+          className="font-black tracking-tight text-white"
+          style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)' }}
         >
           PRECISION
           <br />
@@ -251,7 +252,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-4 max-w-2xl text-sm font-light leading-relaxed text-white/70 md:text-base"
+          className="mx-auto mt-4 max-w-[90%] text-sm font-light leading-relaxed text-white/70 md:text-base md:max-w-2xl px-6 md:px-0"
         >
           Orange County&apos;s premier upholstery atelier. 25+ years. A new expanded facility.
         </motion.p>
@@ -260,17 +261,17 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-10 flex flex-col items-center justify-center sm:flex-row sm:gap-4"
         >
-          <a href="#estimate">
-            <Button className="bg-champagne text-obsidian h-12 rounded-none px-8 text-sm font-semibold tracking-wide hover:bg-champagne-light">
+          <a href="#estimate" className="w-full max-w-[320px] sm:w-auto">
+            <Button className="bg-champagne text-obsidian h-12 rounded-none w-full sm:w-auto px-8 text-sm font-semibold tracking-wide hover:bg-champagne-light">
               Start Visual Quote <Camera className="ml-2 h-4 w-4" />
             </Button>
           </a>
-          <a href="#craft">
+          <a href="#craft" className="w-full max-w-[320px] sm:w-auto mt-3 sm:mt-0">
             <Button
               variant="outline"
-              className="h-12 rounded-none border border-white px-8 text-sm font-light tracking-wide text-white bg-transparent hover:bg-white/10 hover:text-white transition-colors duration-200 shadow-none"
+              className="h-12 rounded-none border border-white w-full sm:w-auto px-8 text-sm font-light tracking-wide text-white bg-transparent hover:bg-white/10 hover:text-white transition-colors duration-200 shadow-none"
             >
               View Our Craft →
             </Button>
@@ -1381,9 +1382,9 @@ function AIAgent() {
           Analyze My Project
         </span>
         <span
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-obsidian/60 backdrop-blur-[20px] transition-colors duration-200 hover:border-champagne/40"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 backdrop-blur-[20px] transition-colors duration-200 hover:bg-white/25"
         >
-          <Camera className="h-5 w-5 text-white/80" />
+          <Camera className="h-5 w-5 text-white" />
         </span>
       </motion.button>
 
