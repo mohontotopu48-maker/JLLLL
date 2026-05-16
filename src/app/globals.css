@@ -160,37 +160,19 @@
   outline-offset: 2px;
 }
 
-/* ── Dove logo reflection sweep ── */
+/* ── Dove logo radial gold glow ── */
 .logo-container {
   position: relative;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
 }
 
-.dove-sweep {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  pointer-events: none;
-  /* Mask the sweep to the dove shape only */
-  -webkit-mask-image: url('/images/jl-logo.svg');
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-image: url('/images/jl-logo.svg');
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
+.logo-container .dove-svg {
+  filter: none;
+  transition: filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.logo-container:hover .dove-sweep {
-  transform: translateX(100%);
+.logo-container:hover .dove-svg {
+  filter: drop-shadow(0 0 15px rgba(197, 168, 128, 0.65))
+         drop-shadow(0 0 30px rgba(197, 168, 128, 0.3));
 }

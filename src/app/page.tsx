@@ -126,9 +126,8 @@ function Navigation() {
             <img
               src="/images/jl-logo.svg"
               alt="JL Custom Upholstery Logo"
-              className="h-10 w-auto relative z-10"
+              className="dove-svg h-10 w-auto"
             />
-            <span className="dove-sweep" aria-hidden="true" />
           </span>
           <span className="text-champagne text-2xl font-black tracking-tight">
             JL
