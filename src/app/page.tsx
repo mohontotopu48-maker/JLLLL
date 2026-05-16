@@ -265,9 +265,9 @@ function HeroSection() {
           <a href="#craft">
             <Button
               variant="outline"
-              className="h-12 rounded-none border-white/40 px-8 text-sm font-light tracking-wide text-white hover:bg-white/10 hover:text-white"
+              className="h-12 rounded-none border border-white px-8 text-sm font-light tracking-wide text-white bg-transparent hover:bg-white/10 hover:text-white transition-colors duration-200 shadow-none"
             >
-              View Our Craft
+              View Our Craft →
             </Button>
           </a>
         </motion.div>
