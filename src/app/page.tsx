@@ -526,6 +526,36 @@ function SpecialistSection() {
   )
 }
 
+/* ──────────────────────────────── VIDEO SHOWCASE ──────────────────────────────── */
+
+function VideoShowcase() {
+  return (
+    <section className="bg-obsidian py-24 md:py-32">
+      <div className="jl-video-section-wrapper">
+        <FadeInSection>
+          <div className="jl-video-text-content">
+            <h2 className="jl-video-title">Craftsmanship In Motion</h2>
+            <p className="jl-video-subtitle">
+              Watch our exact multi-stage restoration process, transforming weather-beaten marine interiors back to immaculate showroom quality.
+            </p>
+          </div>
+        </FadeInSection>
+
+        <FadeInSection delay={0.15}>
+          <div className="jl-video-container">
+            <iframe
+              src="https://www.youtube.com/embed/dM724CSqIC0?rel=0&modestbranding=1"
+              title="JL Custom Upholstery Marine Showcase"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </FadeInSection>
+      </div>
+    </section>
+  )
+}
+
 /* ──────────────────────────────── LEAD WIZARD ──────────────────────────────── */
 
 const projectTypes = [
@@ -1790,6 +1820,7 @@ export default function Page() {
         <HeroSection />
         <MissionSection />
         <SpecialistSection />
+        <VideoShowcase />
         <LeadWizard />
         <DesignerPortalSection />
         <FacilitySection />
