@@ -118,9 +118,10 @@ function Navigation() {
         scrolled ? 'bg-obsidian/95 backdrop-blur-md' : 'bg-obsidian'
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
+      {/* Three-zone layout */}
+      <div className="mx-auto grid h-16 max-w-7xl grid-cols-3 items-center px-4 sm:px-6 lg:px-8">
+        {/* Left Zone: Logo */}
+        <a href="#" className="flex items-center gap-2 justify-self-start">
           <img
             src="/images/jl-logo.svg"
             alt="JL Custom Upholstery Logo"
@@ -134,8 +135,8 @@ function Navigation() {
           </span>
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-8 md:flex">
+        {/* Center Zone: Nav links — perfectly centered in viewport */}
+        <div className="hidden items-center justify-center gap-8 md:flex justify-self-center">
           {links.map((l) => (
             <a
               key={l.href}
@@ -145,6 +146,10 @@ function Navigation() {
               {l.label}
             </a>
           ))}
+        </div>
+
+        {/* Right Zone: CTA button */}
+        <div className="hidden md:flex justify-self-end">
           <a href="#estimate">
             <Button
               className="bg-champagne text-obsidian h-9 rounded-none px-6 text-sm font-semibold tracking-wide hover:bg-champagne-light"
@@ -155,7 +160,7 @@ function Navigation() {
         </div>
 
         {/* Mobile hamburger */}
-        <div className="md:hidden">
+        <div className="md:hidden justify-self-end">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button
