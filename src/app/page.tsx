@@ -122,11 +122,14 @@ function Navigation() {
       <div className="mx-auto flex h-16 w-full items-center justify-between px-6 md:grid md:max-w-7xl md:grid-cols-3 md:px-4 lg:md:px-8">
         {/* Left Zone: Logo — flush left */}
         <a href="#" className="flex items-center gap-2 shrink-0 md:justify-self-start">
-          <img
-            src="/images/jl-logo.svg"
-            alt="JL Custom Upholstery Logo"
-            className="h-10 w-auto"
-          />
+          <span className="logo-container">
+            <img
+              src="/images/jl-logo.svg"
+              alt="JL Custom Upholstery Logo"
+              className="h-10 w-auto relative z-10"
+            />
+            <span className="dove-sweep" aria-hidden="true" />
+          </span>
           <span className="text-champagne text-2xl font-black tracking-tight">
             JL
           </span>
