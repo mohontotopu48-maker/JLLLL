@@ -564,7 +564,7 @@ function LeadWizard() {
     <section id="estimate" className="bg-obsidian py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <FadeInSection>
-          <div className="text-center">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">
               INSTANT PHOTO ESTIMATE
             </h2>
@@ -575,9 +575,21 @@ function LeadWizard() {
         </FadeInSection>
 
         <FadeInSection delay={0.15}>
-          <div className="mt-12">
+          {/* Glassmorphism card container */}
+          <div
+            className="mt-12 p-8 md:p-[60px_40px]"
+            style={{
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              borderRadius: '0px',
+              maxWidth: '900px',
+              margin: '40px auto',
+            }}
+          >
             {/* Progress bar */}
-            <div className="mb-8">
+            <div className="mb-12">
               <div className="flex items-center justify-between mb-2">
                 {[1, 2, 3, 4].map((s) => (
                   <div key={s} className="flex items-center">
@@ -632,15 +644,27 @@ function LeadWizard() {
                           key={pt.id}
                           type="button"
                           onClick={() => setProjectType(pt.id)}
-                          className={`flex flex-col items-center justify-center gap-3 border p-6 bg-obsidian transition-colors ${
-                            selected
-                              ? 'border-champagne bg-champagne/5'
-                              : 'border-white/10 hover:border-white/25'
+                          style={{
+                            background: selected ? 'rgba(197, 168, 128, 0.06)' : '#111111',
+                            border: selected
+                              ? '1px solid #C5A880'
+                              : '1px solid rgba(255, 255, 255, 0.08)',
+                            padding: '32px 24px',
+                            transition: 'border-color 0.15s ease',
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!selected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)'
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!selected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
+                          }}
+                          className={`flex flex-col items-center justify-center gap-3 ${
+                            selected ? '' : ''
                           }`}
                         >
                           <Icon
-                            className={`h-8 w-8 ${
-                              selected ? 'text-champagne' : 'text-white/50'
+                            className={`h-7 w-7 stroke-[1.2] ${
+                              selected ? 'text-champagne' : 'text-white/60'
                             }`}
                           />
                           <span
@@ -680,10 +704,22 @@ function LeadWizard() {
                           key={st.id}
                           type="button"
                           onClick={() => setServiceType(st.id)}
-                          className={`border px-6 py-3 text-sm font-medium tracking-wide transition-colors ${
-                            selected
-                              ? 'border-champagne bg-champagne text-obsidian'
-                              : 'border-white/10 bg-white/5 text-white/60 hover:border-white/25'
+                          style={{
+                            background: selected ? '#C5A880' : '#111111',
+                            border: selected
+                              ? '1px solid #C5A880'
+                              : '1px solid rgba(255, 255, 255, 0.08)',
+                            padding: '12px 24px',
+                            transition: 'border-color 0.15s ease, background 0.15s ease',
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!selected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)'
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!selected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
+                          }}
+                          className={`text-sm font-medium tracking-wide ${
+                            selected ? 'text-obsidian' : 'text-white/60'
                           }`}
                         >
                           {st.label}
@@ -732,7 +768,8 @@ function LeadWizard() {
                     ) : (
                       <label
                         htmlFor="photo-upload"
-                        className="flex min-h-[200px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed border-white/15 bg-white/5 transition-colors hover:border-champagne/50 hover:bg-champagne/5"
+                        className="flex min-h-[200px] cursor-pointer flex-col items-center justify-center gap-4 border border-dashed bg-[#111111] transition-colors hover:border-champagne/50 hover:bg-champagne/5"
+                        style={{ borderColor: 'rgba(255, 255, 255, 0.12)' }}
                       >
                         <Camera className="h-10 w-10 text-white/30" />
                         <div className="text-center">
@@ -799,7 +836,7 @@ function LeadWizard() {
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
                         placeholder="Your full name"
-                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
+                        className="mt-1 rounded-none border-white/10 bg-[#111111] text-white placeholder:text-white/25 focus-visible:ring-champagne"
                       />
                     </div>
                     <div>
@@ -815,7 +852,7 @@ function LeadWizard() {
                         value={contactPhone}
                         onChange={(e) => setContactPhone(e.target.value)}
                         placeholder="(555) 000-0000"
-                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
+                        className="mt-1 rounded-none border-white/10 bg-[#111111] text-white placeholder:text-white/25 focus-visible:ring-champagne"
                       />
                     </div>
                     <div>
@@ -831,7 +868,7 @@ function LeadWizard() {
                         value={contactEmail}
                         onChange={(e) => setContactEmail(e.target.value)}
                         placeholder="you@example.com"
-                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
+                        className="mt-1 rounded-none border-white/10 bg-[#111111] text-white placeholder:text-white/25 focus-visible:ring-champagne"
                       />
                     </div>
                   </div>
