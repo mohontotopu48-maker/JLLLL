@@ -472,10 +472,30 @@ function SpecialistSection() {
 /* ──────────────────────────────── LEAD WIZARD ──────────────────────────────── */
 
 const projectTypes = [
-  { id: 'luxury-home', label: 'Home', icon: Home },
-  { id: 'commercial', label: 'Commercial', icon: Building2 },
-  { id: 'marine', label: 'Marine & RV', icon: Ship },
-  { id: 'classic-auto', label: 'Auto', icon: Car },
+  {
+    id: 'luxury-home',
+    label: 'Home',
+    icon: Home,
+    items: ['Custom Sofas & Sectionals', 'Dining & Accent Chairs', 'Antique & Heirloom Restoration', 'Indoor/Outdoor Cushions'],
+  },
+  {
+    id: 'commercial',
+    label: 'Commercial',
+    icon: Building2,
+    items: ['Restaurant Booths & Banquettes', 'Office & Executive Seating', 'Lounge & Hospitality Furniture', 'Medical & Clinic Tables'],
+  },
+  {
+    id: 'marine',
+    label: 'Marine & RV',
+    icon: Ship,
+    items: ['Yacht & Boat Enclosures', 'Exterior Marine Cushions', 'Custom RV Interiors', "Captain's Chairs"],
+  },
+  {
+    id: 'classic-auto',
+    label: 'Auto',
+    icon: Car,
+    items: ['Complete Interior Restorations', 'Leather Seat Upgrades', 'Convertible Tops & Headliners', 'Door Panels & Carpeting'],
+  },
 ]
 
 const serviceTypes = [
@@ -495,6 +515,7 @@ function LeadWizard() {
   const [contactPhone, setContactPhone] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const leadScore = calculateLeadScore(projectType, serviceType)
@@ -642,11 +663,10 @@ function LeadWizard() {
                     {projectTypes.map((pt) => {
                       const Icon = pt.icon
                       const selected = projectType === pt.id
+                      const isExpanded = expandedCard === pt.id
                       return (
-                        <button
+                        <div
                           key={pt.id}
-                          type="button"
-                          onClick={() => setProjectType(pt.id)}
                           style={{
                             background: selected ? 'rgba(197, 168, 128, 0.06)' : '#111111',
                             border: selected
@@ -654,16 +674,18 @@ function LeadWizard() {
                               : '1px solid rgba(255, 255, 255, 0.08)',
                             padding: '32px 24px',
                             transition: 'border-color 0.15s ease',
+                            cursor: 'pointer',
                           }}
                           onMouseEnter={(e) => {
+                            setExpandedCard(pt.id)
                             if (!selected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)'
                           }}
                           onMouseLeave={(e) => {
+                            setExpandedCard(null)
                             if (!selected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
                           }}
-                          className={`flex flex-col items-center justify-center gap-3 ${
-                            selected ? '' : ''
-                          }`}
+                          onClick={() => setProjectType(pt.id)}
+                          className="flex flex-col items-center justify-center gap-3"
                         >
                           <Icon
                             className={`h-7 w-7 stroke-[1.2] ${
@@ -671,13 +693,48 @@ function LeadWizard() {
                             }`}
                           />
                           <span
-                            className={`text-xs font-medium tracking-wide ${
+                            className={`flex items-center gap-1 text-xs font-medium tracking-wide ${
                               selected ? 'text-champagne' : 'text-white/60'
                             }`}
                           >
                             {pt.label}
+                            <ChevronDown
+                              className={`h-3 w-3 transition-transform duration-300 ${
+                                isExpanded ? 'rotate-180' : 'rotate-0'
+                              }`}
+                              style={{ strokeWidth: 1.5 }}
+                            />
                           </span>
-                        </button>
+                          {/* Disclosure dropdown */}
+                          <div
+                            style={{
+                              maxHeight: isExpanded ? '200px' : '0px',
+                              opacity: isExpanded ? 1 : 0,
+                              overflow: 'hidden',
+                              transition: 'max-height 0.4s ease-in-out, opacity 0.3s ease',
+                              background: 'transparent',
+                              paddingTop: isExpanded ? '16px' : '0px',
+                              textAlign: 'left',
+                              width: '100%',
+                            }}
+                          >
+                            <ul>
+                              {pt.items.map((item) => (
+                                <li
+                                  key={item}
+                                  className="text-white/60 hover:text-white transition-colors duration-150"
+                                  style={{
+                                    fontSize: '13px',
+                                    fontWeight: 400,
+                                    lineHeight: 1.8,
+                                  }}
+                                >
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
                       )
                     })}
                   </div>
