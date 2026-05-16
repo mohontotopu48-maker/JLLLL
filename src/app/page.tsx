@@ -20,6 +20,7 @@ import {
   Award,
   Shield,
   Clock,
+  Send,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -1430,302 +1431,287 @@ function UtilityBar() {
   )
 }
 
-/* ──────────────────────────────── AI AGENT ──────────────────────────────── */
+/* ──────────────────────────────── ATELIER AI ──────────────────────────────── */
 
-function AIAgent() {
+interface ChatMessage {
+  role: 'user' | 'ai'
+  text: string
+  photo?: string
+}
+
+function AtelierAI() {
   const [open, setOpen] = useState(false)
-  const [step, setStep] = useState(0) // 0=welcome, 1=photo, 2=analyzing, 3=material, 4=contact, 5=done
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
-  const [materialChoice, setMaterialChoice] = useState('')
-  const [contactName, setContactName] = useState('')
-  const [contactPhone, setContactPhone] = useState('')
-  const [contactEmail, setContactEmail] = useState('')
-  const [submitting, setSubmitting] = useState(false)
+  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [sessionId] = useState(() => Math.random().toString(36).substring(2, 15))
+  const [photoHover, setPhotoHover] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const resetFlow = () => {
-    setStep(0)
-    setPhotoPreview(null)
-    setMaterialChoice('')
-    setContactName('')
-    setContactPhone('')
-    setContactEmail('')
-    setSubmitting(false)
+  // Send initial greeting on first open
+  useEffect(() => {
+    if (open && messages.length === 0) {
+      setMessages([
+        {
+          role: 'ai',
+          text: 'Welcome to the JL Atelier. How may I assist you with your upholstery project today?',
+        },
+      ])
+    }
+  }, [open, messages.length])
+
+  // Auto-scroll to bottom on new messages
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, loading])
+
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || loading) return
+    const userMsg: ChatMessage = { role: 'user', text }
+    setMessages((prev) => [...prev, userMsg])
+    setInput('')
+    setLoading(true)
+    try {
+      const res = await fetch('/api/agent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, message: text }),
+      })
+      const data = await res.json()
+      const aiText = data.success && data.response
+        ? data.response
+        : 'I apologize, but I\'m unable to process your request at this time. Please try again shortly.'
+      setMessages((prev) => [...prev, { role: 'ai', text: aiText }])
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'ai', text: 'I apologize, but I\'m unable to process your request at this time. Please try again shortly.' },
+      ])
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     const reader = new FileReader()
     reader.onloadend = () => {
-      setPhotoPreview(reader.result as string)
-      setStep(2) // go to analyzing
-      setTimeout(() => setStep(3), 2500) // auto-advance to material choice
+      const result = reader.result as string
+      setMessages((prev) => [
+        ...prev,
+        { role: 'user', text: '[Photo uploaded]', photo: result },
+      ])
+      sendMessage('A user has uploaded a photo of their piece for estimation.')
     }
     reader.readAsDataURL(file)
+    // Reset input so the same file can be re-selected
+    e.target.value = ''
   }
 
-  const handleSubmit = async () => {
-    if (!contactName || !contactPhone || !contactEmail) return
-    setSubmitting(true)
+  const handleClose = async () => {
+    setOpen(false)
+    setMessages([])
+    setInput('')
     try {
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: contactName,
-          email: contactEmail,
-          phone: contactPhone,
-          projectType: 'concierge-estimate',
-          serviceType: materialChoice || 'general',
-          photos: [],
-          source: 'ai-concierge',
-        }),
-      })
-      setStep(5)
+      await fetch(`/api/agent?sessionId=${sessionId}`, { method: 'DELETE' })
     } catch {
-      setStep(5)
-    } finally {
-      setSubmitting(false)
+      // silently ignore
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      sendMessage(input)
     }
   }
 
   return (
     <>
-      {/* Floating Glassmorphism Tab */}
-      <motion.button
-        onClick={() => { setOpen(!open); if (!open && step === 0) { /* keep step */ } }}
-        className="fixed bottom-6 right-6 z-50 group flex items-center gap-2"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        aria-label="Open AI Concierge"
-      >
-        <span className="hidden group-hover:inline text-xs font-light tracking-wide text-white/80 whitespace-nowrap">
-          Analyze My Project
-        </span>
-        <span
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 backdrop-blur-[20px] transition-colors duration-200 hover:bg-white/25"
-        >
-          <Camera className="h-5 w-5 text-white" />
-        </span>
-      </motion.button>
+      {/* ── Floating Vertical Tab (visible when chat closed) ── */}
+      <AnimatePresence>
+        {!open && (
+          <motion.button
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setOpen(true)}
+            className="fixed right-0 top-1/2 z-40 -translate-y-1/2 cursor-pointer py-6 px-3"
+            style={{
+              background: '#111111',
+              border: '1px solid #C5A880',
+              borderRight: 'none',
+              borderRadius: '8px 0 0 8px',
+              writingMode: 'vertical-lr',
+              textOrientation: 'mixed',
+            }}
+            aria-label="Open Atelier AI Chat"
+          >
+            <span
+              className="flex items-center gap-3 text-xs font-medium tracking-[0.25em] uppercase transition-colors"
+              style={{ color: 'rgba(255,255,255,0.8)' }}
+              onMouseEnter={(e) => {
+                ;(e.currentTarget.parentElement as HTMLElement).style.borderColor = '#d4c09e'
+              }}
+              onMouseLeave={(e) => {
+                ;(e.currentTarget.parentElement as HTMLElement).style.borderColor = '#C5A880'
+              }}
+            >
+              <Camera className="h-4 w-4" style={{ writingMode: 'vertical-lr' }} />
+              ASK ATELIER AI
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-      {/* Chat Panel */}
+      {/* ── Chat Panel ── */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-22 right-6 z-50 flex h-[520px] w-[380px] max-w-[calc(100vw-48px)] flex-col border border-white/15 bg-obsidian/80 backdrop-blur-[20px] shadow-2xl"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 40 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col"
+            style={{
+              width: '400px',
+              maxWidth: 'calc(100vw - 24px)',
+              height: '600px',
+              maxHeight: 'calc(100vh - 48px)',
+              background: '#0A0A0A',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRight: 'none',
+              borderRadius: '8px 0 0 8px',
+            }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+            {/* ── Header ── */}
+            <div
+              className="flex shrink-0 items-center justify-between px-5 py-4"
+              style={{ background: '#000000', borderBottom: '1px solid #C5A880' }}
+            >
               <div className="flex items-center gap-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
-                  <Camera className="h-4 w-4 text-champagne" />
-                </span>
+                <Camera className="h-4 w-4 text-champagne" />
                 <div>
-                  <p className="text-sm font-semibold text-white">JL Atelier Concierge</p>
-                  <p className="text-[10px] font-light tracking-wide text-white/40">AI-Powered Consultation</p>
+                  <p className="text-sm font-semibold tracking-wide text-white">
+                    Atelier Design Assistant
+                  </p>
+                  <p className="text-[10px] font-light tracking-wider text-white/40">
+                    JL Custom Upholstery
+                  </p>
                 </div>
               </div>
               <button
-                onClick={() => { setOpen(false); resetFlow() }}
-                className="flex h-7 w-7 items-center justify-center text-white/40 transition-colors hover:text-white"
-                aria-label="Close"
+                onClick={handleClose}
+                className="text-white/40 transition-colors hover:text-white"
+                aria-label="Close chat"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Step Content */}
-            <div className="flex-1 overflow-y-auto px-5 py-6 scroll-smooth">
-
-              {/* Step 0: Welcome */}
-              {step === 0 && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  <Camera className="h-8 w-8 text-champagne/40 mb-4" />
-                  <p className="text-sm font-light text-white/60 leading-relaxed">
-                    Welcome to the JL Atelier.<br />
-                    To begin your precision estimate,<br />
-                    snap or upload a photo of your piece.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setStep(1)
-                      setTimeout(() => fileInputRef.current?.click(), 100)
-                    }}
-                    className="mt-6 bg-champagne text-obsidian h-10 px-6 text-xs font-semibold tracking-wide hover:bg-champagne-light transition-colors"
+            {/* ── Messages Area ── */}
+            <div className="flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.15) transparent' }}>
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`mb-3 flex ${
+                    msg.role === 'user' ? 'justify-end' : 'justify-start'
+                  }`}
+                >
+                  <div
+                    className={`max-w-[85%] p-3 text-[13px] leading-relaxed ${
+                      msg.role === 'ai'
+                        ? 'bg-[#111111] text-white/80'
+                        : 'bg-[#C5A880]/10 text-white/80'
+                    }`}
+                    style={{ borderRadius: 0 }}
                   >
-                    Upload Photo <Upload className="ml-2 h-3.5 w-3.5 inline" />
-                  </button>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={handleFileChange}
-                  />
-                </div>
-              )}
-
-              {/* Step 1: Photo Upload */}
-              {step === 1 && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  {photoPreview ? (
-                    <img src={photoPreview} alt="Your piece" className="max-h-48 w-auto border border-white/10 mb-4" />
-                  ) : (
-                    <>
-                      <label
-                        htmlFor="concierge-photo"
-                        className="flex min-h-[180px] w-full cursor-pointer flex-col items-center justify-center gap-3 border-2 border-dashed border-white/15 bg-white/5 hover:border-champagne/30 transition-colors"
-                      >
-                        <Camera className="h-8 w-8 text-white/30" />
-                        <p className="text-sm font-light text-white/50">Tap to snap or upload</p>
-                        <input
-                          id="concierge-photo"
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={handleFileChange}
-                        />
-                      </label>
-                    </>
-                  )}
-                </div>
-              )}
-
-              {/* Step 2: Analyzing */}
-              {step === 2 && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  {photoPreview && (
-                    <img src={photoPreview} alt="Analyzing" className="max-h-32 w-auto border border-white/10 mb-6 opacity-70" />
-                  )}
-                  <div className="w-48 h-[2px] bg-white/10 mb-4 overflow-hidden">
-                    <motion.div
-                      className="h-full bg-champagne"
-                      initial={{ width: '0%' }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 2.2, ease: 'easeInOut' }}
-                    />
-                  </div>
-                  <motion.p
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.8, repeat: Infinity }}
-                    className="text-xs font-light text-white/50 tracking-wide"
-                  >
-                    Analyzing fabric density and frame architecture...
-                  </motion.p>
-                </div>
-              )}
-
-              {/* Step 3: Material Intent */}
-              {step === 3 && (
-                <div className="flex flex-col h-full">
-                  <p className="text-sm font-light text-white/60 leading-relaxed mb-6">
-                    Analysis complete. Before we prepare your estimate, select your material intent:
-                  </p>
-                  <div className="space-y-3">
-                    {[
-                      { id: 'leather', label: 'Leather', desc: 'Full-grain, bonded, or vegan' },
-                      { id: 'performance', label: 'Performance', desc: 'UV-resistant, marine-grade, commercial' },
-                      { id: 'designer', label: 'Designer Textile', desc: 'Premium fabric, pattern, or custom' },
-                    ].map((m) => (
-                      <button
-                        key={m.id}
-                        onClick={() => setMaterialChoice(m.id)}
-                        className={`w-full text-left border px-4 py-3 transition-colors ${
-                          materialChoice === m.id
-                            ? 'border-champagne bg-champagne/5'
-                            : 'border-white/10 bg-white/[0.02] hover:border-white/20'
-                        }`}
-                      >
-                        <p className={`text-sm font-medium ${materialChoice === m.id ? 'text-champagne' : 'text-white/80'}`}>
-                          {m.label}
-                        </p>
-                        <p className="text-[11px] font-light text-white/40 mt-0.5">{m.desc}</p>
-                      </button>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => materialChoice && setStep(4)}
-                    disabled={!materialChoice}
-                    className="mt-6 bg-champagne text-obsidian h-10 px-6 text-xs font-semibold tracking-wide hover:bg-champagne-light transition-colors disabled:opacity-30"
-                  >
-                    Continue <ArrowRight className="ml-2 h-3.5 w-3.5 inline" />
-                  </button>
-                </div>
-              )}
-
-              {/* Step 4: Contact Info */}
-              {step === 4 && (
-                <div className="flex flex-col h-full">
-                  <p className="text-sm font-light text-white/60 leading-relaxed mb-5">
-                    Final step. We&apos;ll send your precision estimate within 24 hours.
-                  </p>
-                  <div className="space-y-3">
-                    <div>
-                      <Label className="text-[10px] font-medium tracking-[0.15em] text-white/40 uppercase">Name</Label>
-                      <Input
-                        value={contactName}
-                        onChange={(e) => setContactName(e.target.value)}
-                        placeholder="Your full name"
-                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
+                    {msg.photo && (
+                      <img
+                        src={msg.photo}
+                        alt="Uploaded photo"
+                        className="mb-2 max-h-32 w-auto border border-white/10"
                       />
-                    </div>
-                    <div>
-                      <Label className="text-[10px] font-medium tracking-[0.15em] text-white/40 uppercase">Phone</Label>
-                      <Input
-                        type="tel"
-                        value={contactPhone}
-                        onChange={(e) => setContactPhone(e.target.value)}
-                        placeholder="(555) 000-0000"
-                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
-                      />
-                    </div>
-                    <div>
-                      <Label className="text-[10px] font-medium tracking-[0.15em] text-white/40 uppercase">Email</Label>
-                      <Input
-                        type="email"
-                        value={contactEmail}
-                        onChange={(e) => setContactEmail(e.target.value)}
-                        placeholder="you@example.com"
-                        className="mt-1 rounded-none border-white/10 bg-white/5 text-white placeholder:text-white/25 focus-visible:ring-champagne"
-                      />
-                    </div>
+                    )}
+                    {msg.text}
                   </div>
-                  <button
-                    onClick={handleSubmit}
-                    disabled={!contactName || !contactPhone || !contactEmail || submitting}
-                    className="mt-6 bg-champagne text-obsidian h-10 px-6 text-xs font-semibold tracking-wide hover:bg-champagne-light transition-colors disabled:opacity-30"
-                  >
-                    {submitting ? 'Submitting...' : 'Submit Estimate Request'}
-                  </button>
-                  <p className="mt-3 text-[10px] font-light text-white/25">Your information is never shared. Period.</p>
+                </div>
+              ))}
+
+              {/* Loading dots */}
+              {loading && (
+                <div className="mb-3 flex justify-start">
+                  <div className="bg-[#111111] p-3 text-[13px] leading-relaxed text-white/80" style={{ borderRadius: 0 }}>
+                    <motion.span
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                      ...
+                    </motion.span>
+                  </div>
                 </div>
               )}
 
-              {/* Step 5: Done */}
-              {step === 5 && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-champagne/10 mb-4">
-                    <Camera className="h-6 w-6 text-champagne" />
-                  </div>
-                  <p className="text-sm font-light text-white/70 leading-relaxed">
-                    Thank you. Your precision estimate<br />
-                    is being prepared. Expect a response<br />
-                    within 24 hours.
-                  </p>
-                  <button
-                    onClick={resetFlow}
-                    className="mt-6 border border-white/20 px-5 py-2 text-xs font-light tracking-wide text-white/60 hover:bg-white/10 transition-colors"
-                  >
-                    Start New Estimate
-                  </button>
-                </div>
-              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* ── Photo Upload Zone ── */}
+            <div className="shrink-0 px-5 pb-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                onMouseEnter={() => setPhotoHover(true)}
+                onMouseLeave={() => setPhotoHover(false)}
+                className="flex w-full items-center justify-center gap-2 py-3 text-center transition-colors"
+                style={{
+                  border: `1px dashed ${photoHover ? 'rgba(197,168,128,0.6)' : 'rgba(197,168,128,0.3)'}`,
+                  background: 'rgba(255,255,255,0.02)',
+                }}
+              >
+                <Camera className="h-3.5 w-3.5 text-white/30" />
+                <span className="text-[11px] font-light tracking-wide text-white/40">
+                  Drop project photos here or Snap a new one!
+                </span>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handlePhotoUpload}
+              />
+            </div>
+
+            {/* ── Input Row ── */}
+            <div className="flex shrink-0 items-center gap-2 px-5 pb-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask about your project..."
+                className="flex-1 border border-white/10 bg-[#111111] px-3 text-sm text-white placeholder:text-white/30 focus-visible:ring-champagne focus-visible:outline-none h-10"
+                style={{ borderRadius: 0 }}
+              />
+              <button
+                type="button"
+                onClick={() => sendMessage(input)}
+                disabled={!input.trim() || loading}
+                className="bg-champagne text-obsidian h-10 px-4 text-sm font-semibold hover:bg-champagne-light transition-colors disabled:opacity-40"
+                style={{ borderRadius: 0 }}
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* ── Footer Attribution ── */}
+            <div className="shrink-0 border-t border-white/5 py-2 text-center">
+              <p className="text-[10px] font-light tracking-wide text-white/25">
+                Powered by NXLBYLDR AI | managed by VSUALdigitalmedia.com
+              </p>
             </div>
           </motion.div>
         )}
@@ -1750,7 +1736,7 @@ export default function Page() {
       </main>
       <Footer />
       <UtilityBar />
-      <AIAgent />
+      <AtelierAI />
     </div>
   )
 }
