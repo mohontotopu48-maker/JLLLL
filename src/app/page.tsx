@@ -1293,18 +1293,42 @@ function Footer() {
           </div>
         </div>
 
-        <Separator className="my-8 bg-white/10" />
-
-        <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
-          <p className="text-xs font-light text-white/30">
-            &copy; {new Date().getFullYear()} JL Custom Upholstery. All rights reserved.
-          </p>
-          <p className="text-xs font-light text-white/30">
-            Scan our business card QR for Instant Photo Estimates
-          </p>
-        </div>
       </div>
     </footer>
+  )
+}
+
+/* ──────────────────────────────── UTILITY BAR ──────────────────────────────── */
+
+function UtilityBar() {
+  return (
+    <div className="bg-black border-t border-white/10">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 py-5 md:flex-row md:justify-between md:gap-0 md:px-10 md:py-5">
+        <p className="text-xs font-light tracking-wide text-white/40">
+          &copy; 2026 JL Custom Upholstery. All rights reserved.
+        </p>
+        <p className="text-xs font-light tracking-wide text-white/40">
+          Powered by{' '}
+          <a
+            href="https://nxlbyldr.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#C5A880] transition-colors duration-200 hover:text-[#d4c09e]"
+          >
+            NXLBYLDR CRM
+          </a>
+          {' | '}managed by{' '}
+          <a
+            href="https://vsualdigitalmedia.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#C5A880] transition-colors duration-200 hover:text-[#d4c09e]"
+          >
+            VSUALdigitalmedia.com
+          </a>
+        </p>
+      </div>
+    </div>
   )
 }
 
@@ -1627,6 +1651,7 @@ export default function Page() {
         <FacilitySection />
       </main>
       <Footer />
+      <UtilityBar />
       <AIAgent />
     </div>
   )
