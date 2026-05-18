@@ -25,8 +25,10 @@ CONTEXT:
 - Services: Full Reupholstery, Custom Build, Repair.
 - The workshop is located at 1112 E Raymond Way, Anaheim, CA 92801. Phone: (714) 805-4391.`
 
+type ChatRole = 'user' | 'system' | 'assistant'
+
 // In-memory conversation store (per session)
-const conversations = new Map<string, { role: string; content: string }[]>()
+const conversations = new Map<string, { role: ChatRole; content: string }[]>()
 
 let zaiInstance: Awaited<ReturnType<typeof ZAI.create>> | null = null
 
@@ -53,7 +55,7 @@ export async function POST(req: NextRequest) {
     let history = conversations.get(sessionKey)
 
     if (!history) {
-      history = [{ role: 'assistant', content: SYSTEM_PROMPT }]
+      history = [{ role: 'system', content: SYSTEM_PROMPT }]
       conversations.set(sessionKey, history)
     }
 
