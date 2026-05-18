@@ -22,12 +22,12 @@ export async function POST(request: Request) {
 
     const inquiry = await db.designerInquiry.create({
       data: {
-        name,
-        email,
-        company,
-        phone: phone || "",
-        portfolio: portfolio || "",
-        message: message || "",
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        company: company.trim(),
+        phone: (phone && typeof phone === "string") ? phone.trim() : "",
+        portfolio: (portfolio && typeof portfolio === "string") ? portfolio.trim() : "",
+        message: (message && typeof message === "string") ? message.trim() : "",
       },
     });
 
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Designer inquiry error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Unable to process your request. Please try again later." },
       { status: 500 }
     );
   }

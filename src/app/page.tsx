@@ -124,7 +124,7 @@ function Navigation() {
       }`}
     >
       {/* Three-zone layout — flex on mobile, grid on desktop */}
-      <div className="mx-auto flex h-16 w-full items-center justify-between px-6 md:grid md:max-w-7xl md:grid-cols-3 md:px-4 lg:md:px-8">
+      <div className="mx-auto flex h-16 w-full items-center justify-between px-6 md:grid md:max-w-7xl md:grid-cols-3 md:px-4 lg:px-8">
         {/* Left Zone: Logo — flush left */}
         <a href="#" className="brand-logo-link gap-2 shrink-0 md:justify-self-start">
           <img
@@ -661,6 +661,7 @@ function LeadWizard() {
           projectType,
           serviceType,
           photos: photoBase64 ? [photoBase64] : [],
+          message: '',
           source: 'website',
         }),
       })
@@ -1501,7 +1502,7 @@ function UtilityBar() {
         <div className="flex flex-col gap-4 md:flex-row md:justify-between md:gap-8">
           <div className="flex-1">
             <p className="text-xs font-light tracking-wide text-white/50">
-              &copy; 2026 JL Custom Upholstery. All rights reserved.
+              &copy; {new Date().getFullYear()} JL Custom Upholstery. All rights reserved.
             </p>
             <p className="mt-2 text-xs font-light leading-relaxed text-white/35">
               JL Custom Upholstery is a premier Orange County workshop providing master craftsmanship in residential furniture, hospitality layouts, and automotive/marine interiors. Quality is our foundational priority. We source elite, high-grade materials and guarantee all structural execution.
@@ -1685,16 +1686,15 @@ function AtelierAI() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 40 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col"
+            className="fixed right-0 top-0 z-40 flex h-full flex-col sm:top-1/2 sm:-translate-y-1/2"
             style={{
-              width: '400px',
-              maxWidth: 'calc(100vw - 24px)',
-              height: '600px',
-              maxHeight: 'calc(100vh - 48px)',
+              width: 'min(400px, calc(100vw - 24px))',
+              height: '100vh',
+              maxHeight: '100vh',
               background: '#0A0A0A',
               border: '1px solid rgba(255,255,255,0.08)',
               borderRight: 'none',
-              borderRadius: '8px 0 0 8px',
+              borderRadius: '0',
             }}
           >
             {/* ── Header ── */}

@@ -55,15 +55,18 @@ export async function POST(request: Request) {
 
     const leadScore = calculateLeadScore(projectType, serviceType);
 
+    // Limit photos array size to prevent oversized payloads
+    const safePhotos = Array.isArray(photos) ? photos.slice(0, 5) : [];
+
     const lead = await db.lead.create({
       data: {
-        name,
-        email,
-        phone,
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        phone: phone.trim(),
         projectType,
         serviceType,
-        photos: JSON.stringify(photos || []),
-        message: message || "",
+        photos: JSON.stringify(safePhotos),
+        message: (message && typeof message === "string") ? message.trim() : "",
         leadScore,
         source: source || "website",
       },
@@ -81,8 +84,9 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error("Lead submission error:", error);
+    // Return a generic error to avoid leaking internal details
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Unable to process your request. Please try again later." },
       { status: 500 }
     );
   }
@@ -98,7 +102,7 @@ export async function GET() {
   } catch (error) {
     console.error("Leads fetch error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Unable to fetch data" },
       { status: 500 }
     );
   }
